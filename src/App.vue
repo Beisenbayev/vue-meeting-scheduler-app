@@ -1,9 +1,12 @@
 <template>
-  <Header title="Task Tracker" />
+  <Header title="Meeting Scheduler" />
+  <TaskForm />
 </template>
 
 <script setup>
 import Header from './components/Header.vue';
+import TaskForm from './components/TaskForm.vue';
+
 </script>
 
 <style>

@@ -1,6 +1,33 @@
-<template></template>
+<template>
+   <form>
+      <div class="input-group">
+         <label>Title</label>
+         <input type="text" v-model="state.title" />
+      </div>
+      <div class="checkbox-group">
+         <label>Important</label>
+         <input type="checkbox" v-model="state.isImportant" />
+      </div>
+      <Button title="Save new meeting" @handle-click="handleSaveMeeting" />
+   </form>
+</template>
 
-<script setup></script>
+<script setup>
+import { reactive } from 'vue';
+import Button from './Button.vue';
+
+const state = reactive({
+   title: 'sss',
+   isImportant: true
+});
+
+const handleSaveMeeting = () => {
+   if (state.title === '') {
+      alert('Meeting title must not be empty!');
+      return
+   }
+}
+</script>
 
 <style scoped>
 form {

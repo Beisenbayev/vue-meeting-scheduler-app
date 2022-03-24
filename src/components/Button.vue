@@ -1,6 +1,16 @@
-<template></template>
+<template>
+   <button :style="{ background: props.color }" @click.prevent="$emit('handle-click')">{{ props.title }}</button>
+</template>
 
 <script setup>
+const props = defineProps({
+   title: String,
+   color: {
+      type: String,
+      default: '#2c3e50'
+   }
+});
+const emits = defineEmits(['handle-click']);
 </script>
 
 <style scoped>
