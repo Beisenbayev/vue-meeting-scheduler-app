@@ -2,7 +2,7 @@
    <form>
       <div class="input-group">
          <label>Title</label>
-         <input type="text" v-model="state.title" />
+         <input type="text" v-model="state.title" placeholder="meeting title" />
       </div>
       <div class="checkbox-group">
          <label>Important</label>
@@ -16,9 +16,11 @@
 import { reactive } from 'vue';
 import Button from './Button.vue';
 
+const emits = defineEmits(['add-new-meeting']);
+
 const state = reactive({
-   title: 'sss',
-   isImportant: true
+   title: '',
+   isImportant: false
 });
 
 const handleSaveMeeting = () => {
@@ -26,6 +28,8 @@ const handleSaveMeeting = () => {
       alert('Meeting title must not be empty!');
       return
    }
+   emits('add-new-meeting', { ...state });
+   state.title = '';
 }
 </script>
 

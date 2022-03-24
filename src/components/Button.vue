@@ -1,5 +1,8 @@
 <template>
-   <button :style="{ background: props.color }" @click.prevent="$emit('handle-click')">{{ props.title }}</button>
+   <button
+      :style="{ background: props.color }"
+      @click.prevent="$emit('handle-click')"
+   >{{ props.title }}</button>
 </template>
 
 <script setup>
