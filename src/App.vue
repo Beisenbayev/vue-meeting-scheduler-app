@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 
 import Header from "./components/Header.vue";
@@ -26,6 +26,10 @@ import MeetingItem from "./components/MeetingItem.vue";
 
 const store = useStore();
 const meetings = computed(() => store.state.home.meetings);
+
+onMounted(() => {
+  store.dispatch("initMeetings");
+});
 
 const formIsShown = ref(false);
 const handleToggleForm = () => {

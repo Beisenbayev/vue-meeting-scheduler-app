@@ -6,7 +6,7 @@
     </div>
     <div class="checkbox-group">
       <label>Important</label>
-      <input type="checkbox" v-model="state.isImportant" />
+      <input type="checkbox" v-model="state.important" />
     </div>
     <Button title="Save new meeting" @handle-click="handleSaveMeeting" />
   </form>
@@ -20,7 +20,7 @@ import Button from "./Button.vue";
 const store = useStore();
 const state = reactive({
   title: "",
-  isImportant: false,
+  important: false,
 });
 
 const handleSaveMeeting = () => {
