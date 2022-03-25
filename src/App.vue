@@ -4,66 +4,33 @@
     :formIsShown="formIsShown"
     @toggle-form-shown="handleToggleForm"
   />
-  <MeetingForm v-if="formIsShown" @add-new-meeting="handleAddNewMeeting" />
+  <MeetingForm v-if="formIsShown" />
   <div class="meeting-items">
     <MeetingItem
       :key="meeting.id"
-      v-for="meeting in state.meetings"
+      v-for="meeting in meetings"
       :id="meeting.id"
       :title="meeting.title"
       :isImportant="meeting.important"
-      @update-meeting="handleUpdateMeeting"
-      @delete-meeting="handleDeleteMeeting"
     />
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
 
-import Header from './components/Header.vue';
-import MeetingForm from './components/MeetingForm.vue';
-import MeetingItem from './components/MeetingItem.vue';
+import Header from "./components/Header.vue";
+import MeetingForm from "./components/MeetingForm.vue";
+import MeetingItem from "./components/MeetingItem.vue";
+
+const store = useStore();
+const meetings = computed(() => store.state.home.meetings);
 
 const formIsShown = ref(false);
-let state = reactive({
-  meetings: [
-    {
-      id: 1,
-      title: 'First meeting',
-      important: false,
-    },
-    {
-      id: 2,
-      title: 'Second meeting',
-      important: false,
-    },
-    {
-      id: 3,
-      title: 'Third meeting',
-      important: true,
-    }
-  ]
-});
-
 const handleToggleForm = () => {
   formIsShown.value = !formIsShown.value;
-}
-
-const handleAddNewMeeting = (data) => {
-  state.meetings.push(data);
-}
-
-const handleUpdateMeeting = (id) => {
-  state.meetings.map(item => {
-    if (item.id === id) item.important = !item.important;
-    return item;
-  });
-}
-
-const handleDeleteMeeting = (id) => {
-  state.meetings = state.meetings.filter(item => item.id !== id);
-}
+};
 </script>
 
 <style>
@@ -103,4 +70,3 @@ input {
   overflow-y: auto;
 }
 </style>
-

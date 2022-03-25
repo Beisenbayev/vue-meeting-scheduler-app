@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "vue": "^3.2.25",
+    "vuex": "^4.0.2",
     "yarn": "^1.22.18"
   },
   "devDependencies": {

@@ -1,55 +1,55 @@
 <template>
-   <form>
-      <div class="input-group">
-         <label>Title</label>
-         <input type="text" v-model="state.title" placeholder="meeting title" />
-      </div>
-      <div class="checkbox-group">
-         <label>Important</label>
-         <input type="checkbox" v-model="state.isImportant" />
-      </div>
-      <Button title="Save new meeting" @handle-click="handleSaveMeeting" />
-   </form>
+  <form>
+    <div class="input-group">
+      <label>Title</label>
+      <input type="text" v-model="state.title" placeholder="meeting title" />
+    </div>
+    <div class="checkbox-group">
+      <label>Important</label>
+      <input type="checkbox" v-model="state.isImportant" />
+    </div>
+    <Button title="Save new meeting" @handle-click="handleSaveMeeting" />
+  </form>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-import Button from './Button.vue';
+import { reactive } from "vue";
+import { useStore } from "vuex";
+import Button from "./Button.vue";
 
-const emits = defineEmits(['add-new-meeting']);
-
+const store = useStore();
 const state = reactive({
-   title: '',
-   isImportant: false
+  title: "",
+  isImportant: false,
 });
 
 const handleSaveMeeting = () => {
-   if (state.title === '') {
-      alert('Meeting title must not be empty!');
-      return
-   }
-   emits('add-new-meeting', { ...state });
-   state.title = '';
-}
+  if (state.title === "") {
+    alert("Meeting title must not be empty!");
+    return;
+  }
+  store.dispatch("addNewMeeting", { ...state });
+  state.title = "";
+};
 </script>
 
 <style scoped>
 form {
-   display: flex;
-   flex-direction: column;
-   gap: 15px;
-   margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 30px 0;
 }
 .input-group {
-   display: flex;
-   flex-direction: column;
-   gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .checkbox-group {
-   display: flex;
-   align-items: ceter;
+  display: flex;
+  align-items: ceter;
 }
 .checkbox-group input {
-   margin-left: 10px;
+  margin-left: 10px;
 }
 </style>

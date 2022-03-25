@@ -1,20 +1,23 @@
 <template>
   <div
     :class="['meeting-item', props.isImportant && 'is-important']"
-    @dblclick="emits('update-meeting', props.id)"
+    @dblclick="store.dispatch('updateMeeting', props.id)"
   >
     <p>{{ props.title }}</p>
-    <b @click="emits('delete-meeting', props.id)">x</b>
+    <b @click="store.dispatch('deleteMeeting', props.id)">x</b>
   </div>
 </template>
 
 <script setup>
+import { useStore } from "vuex";
+
+const store = useStore();
 const props = defineProps({
   id: Number,
   title: String,
-  isImportant: Boolean
+  isImportant: Boolean,
 });
-const emits = defineEmits(['update-meeting', 'delete-meeting']);
+
 </script>
 
 <style scoped>
